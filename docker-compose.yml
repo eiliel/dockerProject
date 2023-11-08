@@ -1,0 +1,51 @@
+version: '3'
+services:
+  mysql_database:
+    build:
+      context: ./mySqlDatabase
+    command: --bind-address=0.0.0.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: music_library
+    restart:
+      unless-stopped
+    volumes:
+      - ./mySqlDatabase:/app
+    networks:
+      - mymusicnetwork 
+
+  api:
+    build:
+      context: ./playMusicAPI
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql_database
+    stdin_open: 
+      true
+    tty: 
+      true
+    volumes:
+      - ./playMusicAPI:/app
+    environment:
+      MYSQL_HOST_IP: mysql_database
+    networks:
+      - mymusicnetwork 
+
+  frontend:
+    build:
+      context: ./playMusic
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./playMusic:/app 
+    depends_on:
+      - mysql_database
+      - api
+
+
+networks:
+  mymusicnetwork:
+    driver: bridge
