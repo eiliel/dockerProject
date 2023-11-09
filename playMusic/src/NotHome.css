@@ -66,3 +66,43 @@ select {
     font-size: 16px;
     text-align: center;
 }
+
+#audioFile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#audioFile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.fileButton {
+    border-radius: 5px;
+    border: 2px solid transparent;
+    padding: 0.8em 1.6em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.4s;
+    margin-left: 1em;
+    margin-right: 1em;
+    color: rgb(225, 175, 185);
+    background-color: dimgray;
+}
+
+.fileButton:hover {
+    border-color: rgb(125, 95, 150);
+    color: rgb(240, 200, 205);
+    background-color: rgb(90, 75, 105);
+}
+
+.spaceDiv {
+    margin-top: 1.5em;
+}

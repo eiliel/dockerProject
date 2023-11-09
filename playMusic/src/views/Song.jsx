@@ -63,8 +63,8 @@ export default function Song() {
         <input type="text" name="songTitle" id="songTitle" onChange={(e) => setTitle(e.target.value)}/></>)}
 
         {title &&(
-          <div>
-            <label htmlFor="audioFile">Choose File</label>
+          <div className="spaceDiv">
+            <label htmlFor="audioFile" className="fileButton">Choose File</label>
             <input type="file" name="audioFile" id="audioFile" onChange={(e) => setAudioFile(e.target.value)}/>
             {audioFile && (
             <button type="submit">Upload</button>)}
