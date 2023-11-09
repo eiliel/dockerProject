@@ -37,6 +37,7 @@ app.get('/songs', async (req, res) => {
       SELECT Songs.*, Artists.name AS artist_name 
       FROM Songs
       LEFT JOIN Artists ON Songs.artist_id = Artists.id
+      ORDER BY artist_name ASC
     `);
     connection.end();
     return res.json(rows);
