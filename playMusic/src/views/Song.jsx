@@ -26,7 +26,8 @@ export default function Song() {
   const handleUpload = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    const path = `http://localhost:3001/uploads/${title}_${selectedArtist}.mp3`;
+    const okTitle = title.replace(/ /g, "_").replace(/[.',"?]/g, '');
+    const path = `http://localhost:3001/uploads/${okTitle}_${selectedArtist}.mp3`;
     formData.append('title', title);
     formData.append('artistId', selectedArtist);
     formData.append('audioFile', e.target.audioFile.files[0]);

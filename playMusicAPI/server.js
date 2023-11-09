@@ -8,7 +8,8 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const originalname = `${req.body.title}_${req.body.artistId}.mp3`;
-    const sanitizedFilename = originalname.replace(/ /g, '_');
+    const middleSanitize = originalname.replace(/[.',"?]/g, '');
+    const sanitizedFilename = middleSanitize.replace(/ /g, '_');
     cb(null, sanitizedFilename);
   }
 });
@@ -37,7 +38,6 @@ app.get('/songs', async (req, res) => {
       SELECT Songs.*, Artists.name AS artist_name 
       FROM Songs
       LEFT JOIN Artists ON Songs.artist_id = Artists.id
-      ORDER BY artist_name ASC
     `);
     connection.end();
     return res.json(rows);
@@ -96,7 +96,8 @@ app.post('/artists', async (req, res) => {
 
     // Vérifie si l'artiste existe déjà dans la bdd
     const [existingArtists] = await connection.execute(
-      'SELECT id FROM Artists WHERE name = ?',
+      `SELECT id FROM Artists WHERE name = ? 
+      ORDER BY name ASC`,
       [name]
     );
 
