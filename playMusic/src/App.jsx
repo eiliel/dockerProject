@@ -8,7 +8,7 @@ import PlayMusic from './views/PlayMusic'
 function App() {
 
   return (
-    <div>
+    <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -17,7 +17,7 @@ function App() {
           <Route path="/playMusic" element={<PlayMusic />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   )
 }
 

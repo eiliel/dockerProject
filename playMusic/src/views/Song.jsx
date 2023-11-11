@@ -26,16 +26,19 @@ export default function Song() {
   const handleUpload = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    const okTitle = title.replace(/ /g, "_").replace(/[.',"?]/g, '');
+    const okTitle = title.replace(/ /g, "_").replace(/[.',"?]/g, "");
     const path = `http://localhost:3001/uploads/${okTitle}_${selectedArtist}.mp3`;
-    formData.append('title', title);
-    formData.append('artistId', selectedArtist);
-    formData.append('audioFile', e.target.audioFile.files[0]);
-    formData.append('audioUrl', path);
-  
+    formData.append("title", title);
+    formData.append("artistId", selectedArtist);
+    formData.append("audioFile", e.target.audioFile.files[0]);
+    formData.append("audioUrl", path);
+
     axios
-      .post('http://localhost:3001/audios', formData)
+      .post("http://localhost:3001/audios", formData)
       .then((response) => {
+        setSelectedArtist("");
+        setTitle("");
+        setAudioFile(null);
         setSongAdded(true);
       })
       .catch((error) => {
@@ -44,35 +47,100 @@ export default function Song() {
       });
   };
 
+  const handleFileChange = (e) => {
+    setAudioFile(e.target.files[0]);
+  };
+
   return (
     <>
       <NavBar />
       <h2>Add a song</h2>
       <form encType="multipart/form-data" onSubmit={handleUpload}>
-
         <label htmlFor="artistSelect">Choose an artist </label>
-        <select name="artistsList" id="artistSelect" onChange={(e) => setSelectedArtist(e.target.value)}>
+        <select
+          name="artistsList"
+          id="artistSelect"
+          value={selectedArtist}
+          onChange={(e) => setSelectedArtist(e.target.value)}
+        >
           <option value="">-- Please choose an artist --</option>
           {artists.map((artist) => (
-            <option key={artist.id} value={artist.id}>{artist.name}</option>
+            <option key={artist.id} value={artist.id}>
+              {artist.name}
+            </option>
           ))}
         </select>
-        
+
         {selectedArtist && (
           <>
-        <label htmlFor="songTitle">Enter song title </label>
-        <input type="text" name="songTitle" id="songTitle" onChange={(e) => setTitle(e.target.value)}/></>)}
+            <label htmlFor="songTitle">Enter song title </label>
+            <input
+              type="text"
+              name="songTitle"
+              id="songTitle"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </>
+        )}
 
-        {title &&(
+        {title && (
           <div className="spaceDiv">
-            <label htmlFor="audioFile" className="fileButton">Choose File</label>
-            <input type="file" name="audioFile" id="audioFile" onChange={(e) => setAudioFile(e.target.value)}/>
-            {audioFile && (
-            <button type="submit">Upload</button>)}
+            <label htmlFor="audioFile" className="fileButton">
+              {audioFile ? (
+                <>
+                  {audioFile.name}{" "}
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ verticalAlign: "middle" }}
+                  >
+                    publish
+                  </span>
+                </>
+              ) : (
+                <>
+                  Choose File{" "}
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ verticalAlign: "middle" }}
+                  >
+                    upload
+                  </span>
+                </>
+              )}
+            </label>
+            <input
+              type="file"
+              name="audioFile"
+              id="audioFile"
+              onChange={handleFileChange}
+            />
+            {audioFile && <button type="submit">Upload</button>}
           </div>
         )}
-        {errorUpload && (<p style={{ color: "red" }}>{errorUpload }</p>)}
-        {songAdded && <p style={{ color: "green" }}>Song added</p>}
+        {errorUpload && (
+          <p
+            style={{
+              color: "red",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {errorUpload} <span class="material-symbols-outlined">error</span>
+          </p>
+        )}
+        {songAdded && (
+          <p
+            style={{
+              color: "green",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Song added <span className="material-symbols-outlined">done</span>
+          </p>
+        )}
       </form>
     </>
   );

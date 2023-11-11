@@ -62,8 +62,30 @@ export default function Artist() {
         {artists.map((artist) => (
           <li key={artist.id}>{artist.name}</li>
         ))}
-        {errorUpload && <p style={{ color: "red" }}>{errorUpload}</p>}
-        {artistAdded && <p style={{ color: "green" }}>Artist added</p>}
+        {errorUpload && (
+          <p
+            style={{
+              color: "red",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {errorUpload} <span class="material-symbols-outlined">error</span>
+          </p>
+        )}
+        {artistAdded && (
+          <p
+            style={{
+              color: "green",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Artist added <span className="material-symbols-outlined">done</span>
+          </p>
+        )}
       </div>
     </>
   );

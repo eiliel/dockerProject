@@ -7,9 +7,9 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/'); // Le dossier de destination pour les fichiers uploadés
   },
   filename: function (req, file, cb) {
-    const originalname = `${req.body.title}_${req.body.artistId}.mp3`;
+    const originalname = `${req.body.title}_${req.body.artistId}`;
     const middleSanitize = originalname.replace(/[.',"?]/g, '');
-    const sanitizedFilename = middleSanitize.replace(/ /g, '_');
+    const sanitizedFilename = `${middleSanitize.replace(/ /g, '_')}.mp3`;
     cb(null, sanitizedFilename);
   }
 });
@@ -52,6 +52,7 @@ app.get('/artists', async (req, res) => {
     const [rows, fields] = await connection.execute(`
       SELECT * 
       FROM Artists
+      ORDER BY name ASC
     `);
     connection.end();
     return res.json(rows);
