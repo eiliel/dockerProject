@@ -12,8 +12,6 @@ RUN npm install -g vite
 # Installe les dépendances
 RUN npm install
 
-RUN npm run dev
-
 # Copie tout le contenu du répertoire actuel dans le répertoire de travail
 COPY . .
 
