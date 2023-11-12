@@ -57,7 +57,7 @@ export default function Artist() {
         </button>
       </form>
 
-      <div>
+      <div className="artistList">
         <h3>List of the artists</h3>
         {artists.map((artist) => (
           <li key={artist.id}>{artist.name}</li>

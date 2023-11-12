@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const originalname = `${req.body.title}_${req.body.artistId}`;
-    const middleSanitize = originalname.replace(/[.',"?]/g, '');
+    const middleSanitize = originalname.replace(/[.',"?![\]]/g, '');
     const sanitizedFilename = `${middleSanitize.replace(/ /g, '_')}.mp3`;
     cb(null, sanitizedFilename);
   }

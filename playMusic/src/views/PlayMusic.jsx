@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import NavBar from "../components/NavBar";
-import "../NotHome.css";
 
 function PlayMusic() {
   const [songs, setSongs] = useState([]);
