@@ -270,6 +270,17 @@ select {
   color: rgb(225, 175, 185);
 }
 
+.playerContainer button {
+  background-color: rgb(245, 240, 240);
+  box-shadow: inset 0 3px 20px rgba(0, 0, 0, 0.1);
+}
+
+.playerContainer button:hover {
+  background-color: rgb(225, 210, 240);
+  box-shadow: inset 0 3px 20px rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+}
+
 .reactPlayer {
   display: flex;
   width: 100%;
@@ -297,4 +308,8 @@ select {
   border: 1px solid rgba(255, 255, 255, 0.05);
   margin: auto;
   width: 40%;
+}
+
+li {
+  list-style: none;
 }
