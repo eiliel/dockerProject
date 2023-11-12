@@ -12,6 +12,8 @@ RUN npm install -g vite
 # Installe les dépendances
 RUN npm install
 
+RUN chown -R node /app/node_modules
+
 # Copie tout le contenu du répertoire actuel dans le répertoire de travail
 COPY . .
 
