@@ -1,6 +1,6 @@
 FROM mysql:latest
 
-# Définisse les variables d'environnement pour la configuration de la base de données
+# Définie les variables d'environnement pour la configuration de la base de données
 ENV MYSQL_ROOT_PASSWORD=rootpassword
 ENV MYSQL_DATABASE=music_library
 

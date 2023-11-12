@@ -1,7 +1,7 @@
 # Utilise une image Node.js comme base
 FROM node:16
 
-# Définis le répertoire de travail
+# Définie le répertoire de travail
 WORKDIR /app
 
 # Copie le package.json et le package-lock.json dans le répertoire de travail
