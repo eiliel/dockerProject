@@ -5,12 +5,13 @@ FROM node:16
 WORKDIR /app
 
 # Copie le package.json et le package-lock.json dans le répertoire de travail
-COPY . .
-
-RUN npm install -g vite
+COPY package*.json ./
 
 # Installe les dépendances
 RUN npm install
+
+# Copie tout le contenu du répertoire actuel dans le répertoire de travail
+COPY . .
 
 # Expose le port sur lequel fonctionne l'application Vite
 EXPOSE 8080
