@@ -41,6 +41,7 @@ services:
       - "8080:8080"
     volumes:
       - ./playMusic:/app 
+      - /app/node_modules
     depends_on:
       - mysql_database
       - api
