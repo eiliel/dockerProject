@@ -15,6 +15,8 @@ RUN npm install -g vite
 # Copie tout le contenu du répertoire actuel dans le répertoire de travail
 COPY . .
 
+RUN npm install
+
 # Expose le port sur lequel fonctionne l'application Vite
 EXPOSE 8080
 
